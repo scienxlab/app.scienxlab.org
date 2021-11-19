@@ -86,3 +86,13 @@ jobs:
           aws-access-key-id: ${{ secrets.AWSACCESSKEYID }}
           aws-secret-access-key: ${{ secrets.AWSSECRETKEY }}
           aws-region: us-east-1
+
+      # Create the Elastic Beanstalk application
+      - name: Create EBS application
+        run: |
+          eb init -p python-3.8 agile.geosci.ai --region us-east-1
+          
+      # Deploy to or Create the Elastic Beanstalk environment
+      - name: Create environment and deploy
+        run: |
+          (eb use prod-env && eb status prod-env && eb deploy) || eb create prod-env
