@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block body %}
+<div class="container">
+
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <div class="alert alert-warning" role="alert">
+        {% for message in messages %}
+          <p style="padding-top:12px;">{{ message }}</p>
+        {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+
+  <div class="hero-unit">
+
+    <p class="lead" style="margin-bottom:24px;">A few random little <a href="https://agilescientific.com/">Agile*</a> apps.</p>
+
+    <p class="lead" style="margin-bottom:24px;"><a href="/polarity"><strong>/polarity.png</strong></a> &mdash; A web app for generating polarity cartoons.</p>
+
+    <p class="lead" style="margin-bottom:24px;"><a href="/bruges"><strong>/bruges.png</strong></a> &mdash; A web app for generating the <a href="https://github.com/agile-geoscience/bruges">bruges</a> logo.</p>
+
+    <p class="lead" style="margin-bottom:24px;">More at <a href="https://geosci.ai/">geosci.ai</a>.</p>
+
+    </div>
+
+</div>
+{% endblock %}

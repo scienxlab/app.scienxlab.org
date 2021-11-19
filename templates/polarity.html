@@ -1,0 +1,150 @@
+{% extends "base.html" %}
+{% block body %}
+<div class="container">
+
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <div class="alert alert-warning" role="alert">
+        {% for message in messages %}
+          <p style="padding-top:12px;">{{ message }}</p>
+        {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+
+  <div class="hero-unit">
+
+    <h2>Polarity</h2>
+
+    <p class="lead" style="margin-bottom:24px;">This applet generates polarity cartoons. What on earth is a polarity cartoon? <a href="https://agilescientific.com/blog/2012/4/5/polarity-cartoons.html">Read this blog post</a>.</p>
+
+    <p class="lead" style="margin-top:24px;">Use the form below to make a quick cartoon (right-click > copy image), or scroll down to read about the API.</p>
+
+</div>
+
+<div class="container">
+
+    <div style="float: left; width: 45%; padding: 24px; margin-bottom: 30px; border: 1px solid lightgray; border-radius: 8px">
+        <form class="form-horizontal lead" id="form" action="/polarity" method="get">
+
+            <div class="control-group">
+            <label class="radio inline lead">
+              <input type="radio" name="layer" onchange="form.submit()" value="hard" {% if data['layer'] == 'hard' %}checked{% endif %}>
+              Hard layer
+            </label>
+            <label class="radio inline lead">
+              <input type="radio" name="layer" onchange="form.submit()" value="soft" {% if data['layer'] == 'soft' %}checked{% endif %}>
+              Soft layer
+            </label>
+            </div>
+
+            <div class="control-group">
+            <label class="radio inline lead">
+              <input type="radio" name="polarity" onchange="form.submit()" value="normal" {% if data['polarity'] == 'normal' %}checked{% endif %}>
+              Normal polarity
+            </label>
+            <label class="radio inline lead">
+              <input type="radio" name="polarity" onchange="form.submit()" value="reverse" {% if data['polarity'] == 'reverse' %}checked{% endif %}>
+              Reverse polarity
+            </label>
+            </div>
+
+            <div class="control-group">
+            <select name='freq' onchange="form.submit()">
+              <option {% if data['freq'] in ['lo', 'low'] %}selected{% endif %}>low</option>
+              <option {% if data['freq'] in ['med', 'medium'] %}selected{% endif %}>medium</option>
+              <option {% if data['freq'] in ['hi', 'high'] %}selected{% endif %}>high</option>
+              <option {% if data['freq'] in ['vhi', 'vhigh'] %}selected{% endif %}>vhigh</option>
+            </select> frequency
+             </div>
+
+            <div class="control-group">
+             <input type="text" name="phase" onchange="form.submit()" placeholder="Phase in degrees" value="{{ data['phase'] }}"> degrees
+             </div>
+
+            <div class="control-group">
+            <label class="radio inline lead">
+              <input type="radio" name="style" onchange="form.submit()" value="ramp" {% if data['style'] == 'ramp' %}checked{% endif %}>
+              Ramp
+            </label>
+            <label class="radio inline lead">
+              <input type="radio" name="style" onchange="form.submit()" value="synthetic" {% if data['style'] in ['syn', 'synthetic', 'vd'] %}checked{% endif %}>
+              Synthetic
+            </label>
+            </div>
+
+            <div class="control-group">
+            <select name='cmap' onchange="form.submit()">
+              <option {% if data['cmap'] == 'RdBu' %}selected{% endif %}>RdBu</option>
+              <option {% if data['cmap'] == 'RdBu_r' %}selected{% endif %}>RdBu_r</option>
+              <option {% if data['cmap'] == 'RdGy' %}selected{% endif %}>RdGy</option>
+              <option {% if data['cmap'] == 'RdGy_r' %}selected{% endif %}>RdGy_r</option>
+              <option {% if data['cmap'] == 'seismic' %}selected{% endif %}>seismic</option>
+              <option {% if data['cmap'] == 'seismic_r' %}selected{% endif %}>seismic_r</option>
+              <option {% if data['cmap'] == 'bwr' %}selected{% endif %}>bwr</option>
+              <option {% if data['cmap'] == 'bwr_r' %}selected{% endif %}>bwr_r</option>
+              <option {% if data['cmap'] == 'gray' %}selected{% endif %}>gray</option>
+              <option {% if data['cmap'] == 'gray_r' %}selected{% endif %}>gray_r</option>
+              <option {% if data['cmap'] == 'Greys' %}selected{% endif %}>Greys</option>
+              <option {% if data['cmap'] == 'Greys_r' %}selected{% endif %}>Greys_r</option>
+            </select>
+             </div>
+
+        </form>
+
+    </div>
+
+    <div style="float: right; width: 45%; margin-bottom: 24px">
+        <a download="polarity-cartoon_{{ data['layer'] }}_{{ data['polarity'] }}_{{ data['freq'] }}-freq_{{ data['phase'] }}-phase_{{ data['style'] }}_{{ data['cmap'] }}.png" href="/polarity"><img src="data:image/png;base64,{{ data['image'] }}" /></a>
+    </div>
+
+</div>
+
+  <div class="hero-unit">
+
+    <h3>Use the API</h3>
+
+    <p class="lead" style="margin-top:24px;">Quick URL for PNGs:</p>
+
+    <p><a href="https://agile.geosci.ai/polarity.png"><pre>https://agile.geosci.ai/polarity.png</pre></a></p>
+
+    <p class="lead" style="margin-top:24px;">There's a different endpoint for SVGs:</p>
+
+    <p><a href="https://agile.geosci.ai/polarity.svg"><pre>https://agile.geosci.ai/polarity.svg</pre></a></p>
+
+    <p class="lead" style="margin-top:24px;">Example URL with the default values:</p>
+
+    <p><a href="https://agile.geosci.ai/polarity.png?layer=hard&polarity=normal&freq=med&phase=0&style=vd&cmap=RdBu"><pre>https://agile.geosci.ai/polarity.png?layer=hard&polarity=normal&freq=med&phase=0&style=vd&cmap=RdBu</pre></a></p>
+
+    <p class="lead" style="margin-top:24px;">The parameters (defaults in bold):</p>
+
+    <p><ul>
+        <li><strong>layer</strong> &mdash; kind of layer in the earth model &mdash; <strong><code>hard</code></strong> or <code>soft</code>.</li>
+        <li><strong>polarity</strong> &mdash; normal (US, SEG) or reverse (European) polarity &mdash; <strong><code>normal</code></strong> or <code>reverse</code>.</li>
+        <li><strong>freq</strong> &mdash; the frequency of the wavelet used &mdash; <code>lo</code>, <strong><code>med</code></strong>, <code>hi</code>, or <code>vhi</code>. Spellings 'low' and 'high' are allowed.</li>
+        <li><strong>phase</strong> &mdash; the phase of the wavelet used &mdash; integer, degrees, default 0.</li>
+        <li><strong>style</strong> &mdash; variable density synthetic or simple ramp &mdash; <strong><code>syn</code></strong> or <code>ramp</code>.</li>
+        <li><strong>cmap</strong> &mdash; only matplotlib colourmaps are allowed, see <a href="https://matplotlib.org/3.1.1/gallery/color/colormap_reference.html"><code>matplotlib</code> help</a>. E.g. <strong><code>RdBu</code></strong>, <code>RdGy</code>, <code>seismic</code>, <code>gray</code> or <code>seismic</code>. You can reverse any colourmap by appending <code>_r</code>, e.g. <code>gray_r</code>.</li>
+    </ul></p>
+
+    </div>
+
+<div class="hero-unit">
+
+    <h3>Get the code</h3>
+
+    <p class="lead" style="margin-top:24px;"><a href="https://gist.github.com/kwinkunks/8014f6b2d9b05b043bee7ebf55fa9fda">You can get the code here.</a> The script has a command line interface, or use it as a module in your own code.</p>
+</div>
+
+  <div class="hero-unit">
+
+     <h3>About this app</h3>
+
+    <p>The cartoons are <a href="https://matplotlib.org/index.html">matplotlib</a> plots generated by a Python Flask web app running on <a href="https://pythonanywhere.com">pythonanywhere.com</a>.</p>
+
+    <p><a title="CC0 - No rights reserved" href="https://creativecommons.org/share-your-work/public-domain/cc0/"><img src="../static/cczero.png" width="180" alt="CC0" /></a> Images generated by this tool are free from copyright. Do whatever you like with them.</p>
+
+    </div>
+
+</div>
+{% endblock %}

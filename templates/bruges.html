@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block body %}
+<div class="container">
+
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <div class="alert alert-warning" role="alert">
+        {% for message in messages %}
+          <p style="padding-top:12px;">{{ message }}</p>
+        {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+
+  <div class="hero-unit">
+
+    <h3>/bruges.png</h3>
+
+    <p class="lead" style="margin-bottom:24px;">This applet generates a 'logo' for <a href="https://github.com/agile-geoscience/bruges"><strong>bruges</strong></a>, a geophysics library. "Bruges" stands for "Bag of really useful geophysical equations and stuff", but you can perturb the words <strong>bag</strong>, <strong>really</strong>, <strong>useful</strong>, and <strong>stuff</strong>.</p>
+
+    <p class="lead" style="margin-bottom:24px;">Example URL with the default values:</p>
+
+    <p><a href="https://agile.geosci.ai/bruges.png?n=4&p=0.5&style=none"><pre>https://agile.geosci.ai/bruges.png?n=4&p=0.5&style=none</pre></a></p>
+
+    <p class="lead" style="margin-bottom:24px;">The parameters:</p>
+
+    <p><ul>
+        <li><strong>n</strong> &mdash; the number of words that can be perturbed, takes 1, 2, 3, or 4 (all of them).</li>
+        <li><strong>p</strong> &mdash; the probability that the name will be perturned, takes values 0 (never) to 1 (always).</li>
+        <li><strong>style</strong> &mdash; <code>bubble</code> or <code>none</code> (or anything else).</li>
+    </ul></p>
+
+    <h3>FAQ</h3>
+    <p><ul>
+        <li><strong>Is this as silly as it seems?</strong> &mdash; Yes.</li>
+    </ul></p>
+
+    </div>
+
+</div>
+{% endblock %}
