@@ -32,28 +32,28 @@ class InvalidUsage(Exception):
 
 
 # The app.
-app = Flask(__name__)
+application = Flask(__name__)
 
 
 # Routes and handlers.
-@app.errorhandler(InvalidUsage)
+@application.errorhandler(InvalidUsage)
 def handle_invalid_usage(error):
     response = jsonify(error.to_dict())
     response.status_code = error.status_code
     return response
 
 
-@app.route('/')
+@application.route('/')
 def main():
     return render_template('index.html', title='Home')
 
 
-@app.route('/about')
+@application.route('/about')
 def about():
     return render_template('about.html', title='About')
 
 
-@app.route('/polarity')
+@application.route('/polarity')
 def polarity():
     layer = str(request.args.get('layer') or 'hard').lower()
     polarity = str(request.args.get('polarity') or 'normal').lower()
@@ -82,7 +82,7 @@ def polarity():
     return render_template('polarity.html', title='Polarity', data=data)
 
 
-@app.route('/polarity.png')
+@application.route('/polarity.png')
 def polarity_png():
     layer = str(request.args.get('layer') or 'hard')
     polarity = str(request.args.get('polarity') or 'normal')
@@ -103,7 +103,7 @@ def polarity_png():
     return response
 
 
-@app.route('/polarity.svg')
+@application.route('/polarity.svg')
 def polarity_svg():
     layer = str(request.args.get('layer') or 'hard')
     polarity = str(request.args.get('polarity') or 'normal')
@@ -124,12 +124,12 @@ def polarity_svg():
     return response
 
 
-@app.route('/synthetic')
+@application.route('/synthetic')
 def synthetic():
     return render_template('synthetic.html', title='Synthetic')
 
 
-@app.route('/synthetic.png')
+@application.route('/synthetic.png')
 def synthetic_api():
     imps = request.args.get('imps')
     if imps is not None:
@@ -162,12 +162,12 @@ def synthetic_api():
 # Bruges logo server
 #
 
-@app.route('/bruges')
+@application.route('/bruges')
 def bruges():
     return render_template('bruges.html', title='Bruges')
 
 
-@app.route('/bruges.png')
+@application.route('/bruges.png')
 def bruges_png():
 
     p = float(request.args.get('p') or 0.5)
@@ -198,7 +198,7 @@ def bruges_png():
     return response
 
 
-@app.route('/bruges.json')
+@application.route('/bruges.json')
 def bruges_json():
 
     p = float(request.args.get('p') or 0.5)
@@ -213,7 +213,7 @@ def bruges_json():
     return jsonify(dictionary)
 
 
-@app.route('/bruges.txt')
+@application.route('/bruges.txt')
 def bruges_text():
 
     p = float(request.args.get('p') or 0.5)
@@ -225,4 +225,4 @@ def bruges_text():
 
 if __name__ == "__main__":
 
-    app.run()
+    application.run()

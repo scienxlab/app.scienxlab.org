@@ -40,7 +40,7 @@ jobs:
       # Run our unit tests
       - name: Run unit tests
         run: |
-          python test_app.py
+          python test_application.py
 
   deploy:
     # Only run this job if "build" has ended successfully
