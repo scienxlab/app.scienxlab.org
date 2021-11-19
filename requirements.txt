@@ -2,5 +2,5 @@ numpy
 scipy
 matplotlib
 requests
-flask
+Flask
 bruges

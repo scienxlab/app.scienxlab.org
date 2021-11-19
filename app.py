@@ -221,3 +221,8 @@ def bruges_text():
 
     text = get_bruges(p, n)
     return text
+
+
+if __name__ == "__main__":
+
+    app.run()
