@@ -20,7 +20,7 @@ jobs:
           command: |
             cd agile.geosci.ai
             git checkout main
-            GIT_SSH_COMMAND='ssh -i /home/ec2-user/.ssh/id_rsa -o IdentitiesOnly=yes' git pull git@github.com:agilescientific/agile.geosci.ai.git
+            git pull
             docker-compose build
             docker-compose up -d
           host: ${{ secrets.HOST }}
