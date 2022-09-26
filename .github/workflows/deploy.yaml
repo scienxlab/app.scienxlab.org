@@ -1,0 +1,28 @@
+name: Deploy
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+
+      # Now run the deploy script to cycle Docker.
+      # -tt says not a keyboard session.
+      # -vvv says Verbose.
+      - name: agile.geosci.ai ssh deploy
+        uses: fifsky/ssh-action@master
+        with:
+          command: |
+            cd agile.geosci.ai
+            git checkout main
+            GIT_SSH_COMMAND='ssh -i /home/ec2-user/.ssh/id_rsa -o IdentitiesOnly=yes' git pull git@github.com:agilescientific/agile.geosci.ai.git
+            docker-compose build
+            docker-compose up -d
+          host: ${{ secrets.HOST }}
+          user: ec2-user
+          key: ${{ secrets.PRIVATE_KEY }}
+          args: "-tt -vvv"

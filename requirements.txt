@@ -1,6 +1,7 @@
+Flask
 numpy
 scipy
 matplotlib
 requests
-Flask
-bruges
+Jinja2
+aiofiles
