@@ -2,7 +2,7 @@ version: "3"
 
 services:
   server:
-    image: abiosoft/caddy
+    image: caddy
     volumes:
       - ./Caddyfile:/etc/Caddyfile
       - ~/.caddy:/root/.caddy
