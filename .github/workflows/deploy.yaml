@@ -10,7 +10,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-
       # Now run the deploy script to cycle Docker.
       # -tt says not a keyboard session.
       # -vvv says Verbose.
@@ -21,8 +20,9 @@ jobs:
             cd agile.geosci.ai
             git checkout main
             git pull
-            docker-compose build
-            docker-compose up -d
+            docker-compose -f docker-compose.caddy.yml down
+            docker-compose -f docker-compose.caddy.yml build
+            docker-compose -f docker-compose.caddy.yml up -d
           host: ${{ secrets.HOST }}
           user: ec2-user
           key: ${{ secrets.PRIVATE_KEY }}
