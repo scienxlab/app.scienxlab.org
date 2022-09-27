@@ -21,7 +21,7 @@ services:
       dockerfile: Dockerfile
     container_name: agile
     volumes:
-      - .:/app
+      - ./app:/app
     networks:
       - defaultnetwork
     user: $UID:$GID
