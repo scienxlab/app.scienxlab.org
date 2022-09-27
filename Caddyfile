@@ -1,1 +1,3 @@
-agile.geosci.ai
+agile.geosci.ai {
+        proxy / web:80
+}
