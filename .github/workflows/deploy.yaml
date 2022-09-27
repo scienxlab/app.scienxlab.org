@@ -22,7 +22,7 @@ jobs:
             git pull
             docker-compose -f docker-compose.caddy.yml down
             docker-compose -f docker-compose.caddy.yml build
-            docker-compose -f docker-compose.caddy.yml up -d
+            UID="$(id -u)" GID="$(id -g)" docker-compose -f docker-compose.caddy.yml up -d
           host: ${{ secrets.HOST }}
           user: ec2-user
           key: ${{ secrets.PRIVATE_KEY }}
