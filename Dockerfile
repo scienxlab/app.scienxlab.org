@@ -1,4 +1,4 @@
-FROM tiangolo/uvicorn-gunicorn:python3.8
+FROM tiangolo/meinheld-gunicorn-flask:python3.8
 
 COPY ./requirements.txt /app/requirements.txt
 
