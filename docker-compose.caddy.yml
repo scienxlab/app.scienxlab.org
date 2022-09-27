@@ -11,7 +11,7 @@ services:
       - "443:443"
     networks:
       - defaultnetwork
-    user: "${UID}:${GID}"
+    user: $UID:$GID
     depends_on:
       - web
 
@@ -24,7 +24,7 @@ services:
       - .:/app
     networks:
       - defaultnetwork
-    user: "${UID}:${GID}"
+    user: $UID:$GID
 
 networks:
     defaultnetwork:
