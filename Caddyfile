@@ -1,2 +1,3 @@
-agile.geosci.ai
-tls matt@agilescientific.com
+agile.geosci.ai {
+        proxy / web:80
+}
