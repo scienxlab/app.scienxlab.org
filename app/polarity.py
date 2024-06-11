@@ -6,14 +6,16 @@ import base64
 import numpy as np
 import scipy.signal
 import matplotlib.pyplot as plt
-from matplotlib.cm import get_cmap
+import matplotlib
 
+
+matplotlib.use('Agg')
 
 def get_colour(cmap, frac):
     """
     Decide whether to make white or black labels.
     """
-    cmap = get_cmap(cmap)
+    cmap = plt.get_cmap(cmap)
     return 'k' if (np.mean(cmap(frac)[:3]) > 0.5) else 'w'
 
 

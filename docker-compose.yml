@@ -1,20 +1,40 @@
-version: "3"
+version: '3.7'
 
 services:
-  web:
+  flask:
+    container_name: flask
+    restart: unless-stopped
     build:
-      context: .
-      dockerfile: Dockerfile
-    container_name: agile
-    volumes:
-      - ./app:/app
+      context: ./app
+      dockerfile: ./Dockerfile
+    ports:
+      - 8000:8000
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5000/health"]
+      interval: 5m
+      timeout: 5s
+      retries: 3
+      start_period: 15s
+
+  caddy:
+    container_name: caddy
+    restart: unless-stopped
+    build:
+      context: ./caddy
+      dockerfile: ./Dockerfile
     ports:
       - 80:80
       - 443:443
-    networks:
-      - defaultnetwork
-    user: $UID:$GID
+    volumes:
+      - ./data/caddy_data:/data
+      - ./data/caddy_config:/config
+    depends_on:
+      - flask
+    environment:
+      PROXY_BACKEND: flask
+      PROXY_PORT: 8000
+      DOMAIN: ${DOMAIN}
 
-networks:
-    defaultnetwork:
-        driver: bridge
+volumes:
+  caddy_data:
+  caddy_config:

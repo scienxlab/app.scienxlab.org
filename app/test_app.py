@@ -1,4 +1,4 @@
-from app import app
+from main import app
 
 
 with app.test_client() as c:

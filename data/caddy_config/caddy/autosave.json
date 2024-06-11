@@ -1,0 +1,1 @@
+{"apps":{"http":{"servers":{"srv0":{"listen":[":443"],"routes":[{"handle":[{"handler":"subroute","routes":[{"handle":[{"handler":"reverse_proxy","headers":{"response":{"set":{"Strict-Transport-Security":["max-age=31536000;"]}}},"upstreams":[{"dial":"flask:8000"}]}]}]}],"match":[{"host":["localhost"]}],"terminal":true}]}}}}}
