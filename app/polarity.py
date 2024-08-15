@@ -194,7 +194,14 @@ def polarity_cartoon(layer='hard',
 
     # Plot the colourbar.
     ax = axs[3]
-    cmap = cmap or 'gray'
+    if cmap == "petrel":
+        colors = np.loadtxt('./petrel.tsv')
+        cmap = LinearSegmentedColormap.from_list('_', colors)
+    elif cmap == "petrel_r":
+        colors = np.loadtxt('./petrel.tsv')
+        cmap = LinearSegmentedColormap.from_list('_', colors[::-1])
+    else:
+        cmap = cmap or 'gray'
     frac = 1/8
     top_col = get_colour(cmap, frac)
     bot_col = get_colour(cmap, 7*frac)
