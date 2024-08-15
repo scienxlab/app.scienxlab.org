@@ -7,6 +7,7 @@ import numpy as np
 import scipy.signal
 import matplotlib.pyplot as plt
 import matplotlib
+from matplotlib.colors import LinearSegmentedColormap
 
 
 matplotlib.use('Agg')
