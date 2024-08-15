@@ -8,22 +8,15 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
-      # Now run the deploy script to cycle Docker.
-      # -tt says not a keyboard session.
-      # -vvv says Verbose.
       - name: agile.geosci.ai ssh deploy
         uses: fifsky/ssh-action@master
         with:
           command: |
-            cd agile.geosci.ai
-            git checkout main
+            cd app.scienxlab.org
             git pull
-            docker-compose -f docker-compose.caddy.yml down
-            docker-compose -f docker-compose.caddy.yml build
-            UID="$(id -u)" GID="$(id -g)" docker-compose -f docker-compose.caddy.yml up -d
+            make run
           host: ${{ secrets.HOST }}
-          user: ec2-user
+          user: matt
           key: ${{ secrets.PRIVATE_KEY }}
           args: "-tt -vvv"
