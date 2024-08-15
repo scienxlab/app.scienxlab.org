@@ -89,6 +89,8 @@
               <option {% if data['cmap'] == 'Greys_r' %}selected{% endif %}>Greys_r</option>
               <option {% if data['cmap'] == 'bone' %}selected{% endif %}>bone</option>
               <option {% if data['cmap'] == 'bone_r' %}selected{% endif %}>bone_r</option>
+              <option {% if data['cmap'] == 'petrel' %}selected{% endif %}>petrel</option>
+              <option {% if data['cmap'] == 'petrel_r' %}selected{% endif %}>petrel_r</option>
             </select>
              </div>
 
@@ -126,7 +128,7 @@
         <li><strong>freq</strong> &mdash; the frequency of the wavelet used &mdash; <code>lo</code>, <strong><code>med</code></strong>, <code>hi</code>, or <code>vhi</code>. Spellings 'low' and 'high' are allowed.</li>
         <li><strong>phase</strong> &mdash; the phase of the wavelet used &mdash; integer, degrees, default 0.</li>
         <li><strong>style</strong> &mdash; variable density synthetic or simple ramp &mdash; <strong><code>syn</code></strong> or <code>ramp</code>.</li>
-        <li><strong>cmap</strong> &mdash; only matplotlib colourmaps are allowed, see <a href="https://matplotlib.org/3.1.1/gallery/color/colormap_reference.html"><code>matplotlib</code> help</a>. E.g. <strong><code>RdBu</code></strong>, <code>RdGy</code>, <code>seismic</code>, <code>gray</code> or <code>seismic</code>. You can reverse any colourmap by appending <code>_r</code>, e.g. <code>gray_r</code>.</li>
+        <li><strong>cmap</strong> &mdash; with the exception of the custom <code>petrel</code> colourmap, only matplotlib colourmaps are allowed, see <a href="https://matplotlib.org/3.1.1/gallery/color/colormap_reference.html"><code>matplotlib</code> help</a>. E.g. <strong><code>RdBu</code></strong>, <code>RdGy</code>, <code>seismic</code>, <code>gray</code> or <code>seismic</code>. You can reverse any colourmap by appending <code>_r</code>, e.g. <code>gray_r</code>.</li>
     </ul></p>
 
     </div>
