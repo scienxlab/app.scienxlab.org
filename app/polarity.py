@@ -152,7 +152,7 @@ def polarity_cartoon(layer='hard',
 
     if style == 'ramp':
         # cbar is a ramp.
-        cbar = np.linspace(-1, 1, size).reshape(-1, 1)
+        cbar = np.linspace(1, -1, size).reshape(-1, 1)
     else:
         # cbar is the synthetic.
         cbar = syn.reshape(-1, 1)
