@@ -206,7 +206,7 @@ def polarity_cartoon(layer='hard',
     frac = 1/8
     top_col = get_colour(cmap, frac)
     bot_col = get_colour(cmap, 7*frac)
-    ax.imshow(cbar, cmap=cmap, aspect='auto')
+    ax.imshow(cbar, cmap=cmap, aspect='auto', vmin=-1, vmax=1)
     if style == 'ramp':
         ax.text(0, frac*size, '+', ha='center', va='center', color=top_col, size=30)
         ax.text(0, 7*frac*size, '–', ha='center', va='center', color=bot_col, size=40)
