@@ -148,6 +148,9 @@ def polarity_cartoon(layer='hard',
 
     _, v, _, syn = make_synthetic(size, top, base, value, freq=freqs[freq], phase=phase)
 
+    # Normalize so that abs(max) is 1.
+    syn /= np.max(np.abs(syn))
+
     if polarity.lower() not in ['normal', 'seg', 'usa', 'us', 'canada']:
         syn *= -1
 
